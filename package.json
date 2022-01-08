@@ -11,8 +11,10 @@
   "author": "mindflip",
   "license": "ISC",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "express": "^4.17.2",
-    "mongoose": "^6.1.5"
+    "mongoose": "^6.1.5",
+    "validator": "^13.7.0"
   },
   "devDependencies": {
     "env-cmd": "^10.1.0",
