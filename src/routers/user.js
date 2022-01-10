@@ -1,5 +1,4 @@
 const express = require("express");
-const { route } = require("../app");
 const auth = require("../middleware/auth");
 const User = require("../models/user");
 const router = new express.Router();
@@ -54,6 +53,27 @@ router.post("/users/logoutAll", auth, async (req, res) => {
 
 router.get("/users/me", auth, async (req, res) => {
   res.send(req.user);
+});
+
+router.patch("/users/me", auth, async (req, res) => {
+  // check if update lists are valid
+  const updates = Object.keys(req.body);
+  const allowedUpdates = ["name", "email", "password", "age"];
+  const isValidOperation = updates.every((update) =>
+    allowedUpdates.includes(update)
+  );
+
+  if (!isValidOperation) {
+    return res.status(400).send({ error: "Invalid updates!" });
+  }
+
+  try {
+    updates.forEach((update) => (req.user[update] = req.body[update]));
+    await req.user.save();
+    res.send(req.user);
+  } catch (err) {
+    res.status(400).send(e);
+  }
 });
 
 module.exports = router;
