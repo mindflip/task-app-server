@@ -10,7 +10,6 @@ const sendWelcomeEmail = async (email, name) => {
       subject: "Thanks for joining in!",
       text: `Welcome to the app, ${name}. Let me know you get aling with the app`,
     });
-    console.log("email test wc");
   } catch (error) {
     console.log(err);
   }
@@ -18,13 +17,12 @@ const sendWelcomeEmail = async (email, name) => {
 
 const sendCancelationEmail = async (email, name) => {
   try {
-    sgMail.send({
+    await sgMail.send({
       to: email,
       from: "mindflip93@gmail.com",
       subject: "Sorry to see you go!",
       text: `Goodbye, ${name}. I hope to see you back sometime soon.`,
     });
-    console.log("email test c");
   } catch (error) {
     console.log(err);
   }
